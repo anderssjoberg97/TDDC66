@@ -33,7 +33,9 @@ def interpret(expression, values):
 
 #The interpreter for operations
 def doOperation(operand1, operand2, operator):
-
+    if(isinstance(operand1, basestring)):
+        operand1=strToBool(operand1)
+        operand2=strToBool(operand2)
     if operator == "AND":
         return operand1 and operand2
     elif operator == "OR":
