@@ -14,28 +14,21 @@ def interpret(expression, values):
 
         #When the expression list has a length of 2 it is a logical negation
         elif len(expression)==2:
-            if expression[0]=="NOT":
-                return not interpret(expression[1], values)
-
-            else:
-                return interpret(expression[1], values)
+            return not interpret(expression[1], values)
 
         #If expression is a list with a length of 1 then it is evaluated further
         elif len(expression)==1:
-            return value(interpret(expression[0]))
+            return interpret(expression[0], values)
     #If expression is not a list then it is either a constant with the values
     #true or false or it is a reference to a variable in the values list
     else:
         if strIsBool(expression): #Check if expression is a bool constant
             return strToBool(expression)
-        else: #Otherwise get the value from values list
-            return values[expression]
+        else: #Otherwise get the value from values list and convert the string value to boolean
+            return strToBool(values[expression])
 
 #The interpreter for operations
 def doOperation(operand1, operand2, operator):
-    if(isinstance(operand1, basestring)):
-        operand1=strToBool(operand1)
-        operand2=strToBool(operand2)
     if operator == "AND":
         return operand1 and operand2
     elif operator == "OR":
